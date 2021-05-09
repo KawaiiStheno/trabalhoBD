@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.util.List;
+
 import model.entities.Gerente;
 
 public interface DaoGerente {
@@ -8,4 +10,5 @@ public interface DaoGerente {
 	void update(Gerente obj);
 	void deleteById(Integer id);
 	Gerente findById(Integer id);
+	List<Gerente> findAll();
 }
