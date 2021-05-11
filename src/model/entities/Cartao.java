@@ -10,14 +10,19 @@ public class Cartao implements Serializable{
 	private String cpf;
 	private String numero;
 	private String validade;
-	private int cod_segurança;
+	private int cod_seguranca;
 	
-	public Cartao(int id_cartao, String cpf, String numero, String validade, int cod_segurança) {
-		this.id_cartao = id_cartao;
+	private Usuario usuario;
+	
+	public Cartao(String cpf, String numero, String validade, int cod_seguranca, Usuario usuario) {
 		this.cpf = cpf;
 		this.numero = numero;
 		this.validade = validade;
-		this.cod_segurança = cod_segurança;
+		this.cod_seguranca = cod_seguranca;
+		this.usuario = usuario;
+	}
+
+	public Cartao() {
 	}
 
 	public int getId_cartao() {
@@ -53,18 +58,27 @@ public class Cartao implements Serializable{
 	}
 
 	public int getCod_segurança() {
-		return cod_segurança;
+		return cod_seguranca;
 	}
 
-	public void setCod_segurança(int cod_segurança) {
-		this.cod_segurança = cod_segurança;
+	public void setCod_seguranca(int cod_segurança) {
+		this.cod_seguranca = cod_segurança;
 	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + cod_segurança;
+		result = prime * result + cod_seguranca;
 		result = prime * result + id_cartao;
 		return result;
 	}
@@ -78,7 +92,7 @@ public class Cartao implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Cartao other = (Cartao) obj;
-		if (cod_segurança != other.cod_segurança)
+		if (cod_seguranca != other.cod_seguranca)
 			return false;
 		if (id_cartao != other.id_cartao)
 			return false;
@@ -88,7 +102,7 @@ public class Cartao implements Serializable{
 	@Override
 	public String toString() {
 		return "Cartao [id_cartao=" + id_cartao + ", cpf=" + cpf + ", numero=" + numero + ", validade=" + validade
-				+ ", cod_segurança=" + cod_segurança + "]";
+				+ ", cod_segurança=" + cod_seguranca + "]";
 	}
 	
 	

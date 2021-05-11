@@ -9,7 +9,7 @@ public interface DaoCartao {
 
 	void insert(Cartao obj);
 	void update (Cartao obj);
-	Cartao deleteById(Integer id);
+	void deleteById(Integer id);
 	List<Cartao> findAll();
 	List<Cartao> findByCpf(Usuario usuario);
 }

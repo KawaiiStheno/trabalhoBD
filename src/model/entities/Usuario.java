@@ -18,6 +18,9 @@ public class Usuario implements Serializable{
 		this.idade = idade;
 	}
 
+	public Usuario() {
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
