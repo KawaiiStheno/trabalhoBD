@@ -1,8 +1,12 @@
 package model.dao.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
+import dbProperties.DB;
+import dbProperties.DbException;
 import model.dao.DaoGerente;
 import model.entities.Gerente;
 
@@ -16,7 +20,16 @@ public class GerenteDaoJDBC implements DaoGerente{
 	
 	@Override
 	public void insert(Gerente obj) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"INSERT INTO gerente "
+					+ "()");
+		}catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}finally {
+			DB.closeStatement(st);
+		}
 		
 	}
 

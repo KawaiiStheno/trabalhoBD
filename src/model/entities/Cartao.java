@@ -7,15 +7,13 @@ public class Cartao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int id_cartao;
-	private String cpf;
 	private String numero;
 	private String validade;
 	private int cod_seguranca;
 	
 	private Usuario usuario;
 	
-	public Cartao(String cpf, String numero, String validade, int cod_seguranca, Usuario usuario) {
-		this.cpf = cpf;
+	public Cartao(String numero, String validade, int cod_seguranca, Usuario usuario) {
 		this.numero = numero;
 		this.validade = validade;
 		this.cod_seguranca = cod_seguranca;
@@ -31,14 +29,6 @@ public class Cartao implements Serializable{
 
 	public void setId_cartao(int id_cartao) {
 		this.id_cartao = id_cartao;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
 	}
 
 	public String getNumero() {
@@ -101,7 +91,7 @@ public class Cartao implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Cartao [id_cartao=" + id_cartao + ", cpf=" + cpf + ", numero=" + numero + ", validade=" + validade
+		return "Cartao [id_cartao=" + id_cartao + ", numero=" + numero + ", validade=" + validade
 				+ ", cod_segurança=" + cod_seguranca + "]";
 	}
 	

@@ -6,6 +6,7 @@ public class Usuario implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	private int id_usuario;
 	private String cpf;
 	private String senha;
 	private String nome;
@@ -19,6 +20,16 @@ public class Usuario implements Serializable{
 	}
 
 	public Usuario() {
+	}
+	
+	
+
+	public int getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 
 	public String getCpf() {
@@ -53,12 +64,13 @@ public class Usuario implements Serializable{
 		this.idade = idade;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + id_usuario;
 		return result;
 	}
 
@@ -71,15 +83,7 @@ public class Usuario implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (cpf == null) {
-			if (other.cpf != null)
-				return false;
-		} else if (!cpf.equals(other.cpf))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
+		if (id_usuario != other.id_usuario)
 			return false;
 		return true;
 	}

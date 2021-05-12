@@ -11,5 +11,5 @@ public interface DaoCartao {
 	void update (Cartao obj);
 	void deleteById(Integer id);
 	List<Cartao> findAll();
-	List<Cartao> findByCpf(Usuario usuario);
+	List<Cartao> findByIdUsuario(Usuario usuario);
 }

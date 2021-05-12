@@ -39,6 +39,14 @@ public class UsuarioDaoJDBC implements DaoUsuario{
 			
 			int rowsAffected = st.executeUpdate();
 			
+			if(rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs.next()) {
+					int id = rs.getInt(1);
+					obj.setId_usuario(id);
+				}
+			}
+			
 			if(rowsAffected==0) {
 				throw new DbException("Unexpected error! No rows affected!");
 			}
@@ -101,6 +109,7 @@ public class UsuarioDaoJDBC implements DaoUsuario{
 				obj.setNome(rs.getString("nome"));
 				obj.setIdade(rs.getInt("idade"));
 				obj.setSenha(rs.getString("senha"));
+				obj.setId_usuario(rs.getInt("id_usuario"));
 				return obj;
 			}
 			return null;
@@ -128,6 +137,7 @@ public class UsuarioDaoJDBC implements DaoUsuario{
 				obj.setNome(rs.getString("nome"));
 				obj.setIdade(rs.getInt("idade"));
 				obj.setSenha(rs.getString("senha"));
+				obj.setId_usuario(rs.getInt("id_usuario"));
 				list.add(obj);
 			}
 			return list;

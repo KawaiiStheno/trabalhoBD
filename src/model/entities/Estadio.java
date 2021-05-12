@@ -6,6 +6,7 @@ public class Estadio implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	private int id_estadio;
 	private String nome_estadio;
 	private int quant_ingresso;
 	private String estado;
@@ -16,6 +17,18 @@ public class Estadio implements Serializable{
 		this.quant_ingresso = quant_ingresso;
 		this.estado = estado;
 		this.cidade = cidade;
+	}
+
+	public Estadio() {
+	}
+
+	
+	public int getId_estadio() {
+		return id_estadio;
+	}
+
+	public void setId_estadio(int id_estadio) {
+		this.id_estadio = id_estadio;
 	}
 
 	public String getNome_estadio() {

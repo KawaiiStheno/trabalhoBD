@@ -2,12 +2,15 @@ package model.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import dbProperties.DB;
 import dbProperties.DbException;
+import dbProperties.DbIntegrityException;
 import model.dao.DaoEstadio;
 import model.entities.Estadio;
 
@@ -33,8 +36,14 @@ public class EstadioDaoJDBC implements DaoEstadio{
 			st.setString(3, obj.getEstado());
 			st.setString(4, obj.getCidade());
 			
-			if(st.executeUpdate()<0) {
-				throw new DbException("Unexpected error! No rows affected!");
+			int rowsAffected = st.executeUpdate();
+			
+			if(rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs.next()) {
+					int id = rs.getInt(1);
+					obj.setId_estadio(id);
+				}
 			}
 		}catch(SQLException e) {
 			throw new DbException(e.getMessage());
@@ -66,26 +75,96 @@ public class EstadioDaoJDBC implements DaoEstadio{
 
 	@Override
 	public void deleteByNome(String nome) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("DELETE FROM estadio WHERE nome_estadio = ?");
+			st.setString(1, nome);
+			st.executeUpdate();
+		}catch(SQLException e) {
+			throw new DbIntegrityException(e.getMessage());
+		}finally {
+			DB.closeStatement(st);
+		}
 		
 	}
 
 	@Override
 	public Estadio findByNome(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("SELECT * FROM estadio WHERE nome_estadio = ?");
+			st.setString(1, nome);
+			rs = st.executeQuery();
+			if(rs.next()) {
+				Estadio obj = new Estadio();
+				obj.setCidade(rs.getString("cidade"));
+				obj.setEstado(rs.getString("estado"));
+				obj.setNome_estadio(rs.getString("nome_estadio"));
+				obj.setQuant_ingresso(rs.getInt("quant_ingresso"));
+				return obj;
+			}
+			return null;
+		}catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+		
 	}
 
 	@Override
 	public Estadio findbtEstado(String estado) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("SELECT * FROM estadio WHERE estado = ?");
+			st.setString(1, estado);
+			rs = st.executeQuery();
+			if(rs.next()) {
+				Estadio obj = new Estadio();
+				obj.setCidade(rs.getString("cidade"));
+				obj.setEstado(rs.getString("estado"));
+				obj.setNome_estadio(rs.getString("nome_estadio"));
+				obj.setQuant_ingresso(rs.getInt("quant_ingresso"));
+				return obj;
+			}
+			return null;
+		}catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 	@Override
 	public List<Estadio> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("SELECT * FROM estadio ORDER BY nome_estadio");
+			rs = st.executeQuery();
+			
+			List<Estadio> list = new ArrayList<>();
+			
+			while(rs.next()) {
+				Estadio obj = new Estadio();
+				obj.setCidade(rs.getString("cidade"));
+				obj.setEstado(rs.getString("estado"));
+				obj.setNome_estadio(rs.getString("nome_estadio"));
+				obj.setQuant_ingresso(rs.getInt("quant_ingresso"));
+				list.add(obj);
+			}
+			return list;
+			
+		}catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 }

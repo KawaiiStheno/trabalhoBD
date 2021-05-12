@@ -31,12 +31,12 @@ public class CartaoDaoJDBC implements DaoCartao{
 		try {
 			st = conn.prepareStatement(
 					"INSERT INTO cartao_credito"
-					+ "(cpf, numero, validade, cod_seguranca)"
+					+ "(id_usuario, numero, validade, cod_seguranca)"
 					+ "VALUES"
 					+ "(?, ?, ?, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 			
-			st.setString(1, obj.getCpf());
+			st.setInt(1, obj.getUsuario().getId_usuario());
 			st.setString(2, obj.getNumero());
 			st.setString(3, obj.getValidade());
 			st.setInt(4, obj.getCod_segurança());
@@ -67,17 +67,18 @@ public class CartaoDaoJDBC implements DaoCartao{
 		try {
 			st = conn.prepareStatement(
 					"UPDATE cartao_credito"
-					+ "SET id_cartao = ?, cpf = ?, numero = ?, validade = ?, cod_seguranca = ?"
-					+ "WHERE cpf = ?");
+					+ "SET id_cartao = ?, numero = ?, validade = ?, cod_seguranca = ?"
+					+ "WHERE id_usuario = ?");
 			
 			st.setInt(1, obj.getId_cartao());
-			st.setString(2, obj.getCpf());
-			st.setString(3, obj.getNumero());
-			st.setString(4, obj.getValidade());
-			st.setInt(5, obj.getCod_segurança());
-			st.setString(6, obj.getCpf());
+			st.setString(2, obj.getNumero());
+			st.setString(3, obj.getValidade());
+			st.setInt(4, obj.getCod_segurança());
+			st.setInt(5, obj.getUsuario().getId_usuario());
 			
 			st.executeUpdate();
+			
+			
 		}catch(SQLException e) {
 			throw new DbException(e.getMessage());
 		}finally {
@@ -103,12 +104,24 @@ public class CartaoDaoJDBC implements DaoCartao{
 	private Cartao instantiateCartao(ResultSet rs, Usuario us) throws SQLException{
 		Cartao obj = new Cartao();
 		obj.setId_cartao(rs.getInt("id_cartao"));
-		obj.setCpf(rs.getString("cpf"));
 		obj.setNumero(rs.getString("numero"));
 		obj.setValidade(rs.getString("validade"));
 		obj.setCod_seguranca(rs.getInt("cod_seguranca"));
 		obj.setUsuario(us);
 		return obj;
+	}
+	
+	private Usuario instantiateUsuario(ResultSet rs) throws SQLException {
+		
+		Usuario usuario = new Usuario();
+		usuario.setId_usuario(rs.getInt("id_usuario"));
+		usuario.setIdade(rs.getInt("idade"));
+		usuario.setCpf(rs.getString("cpf"));
+		System.out.println("aaaaaaaaaaaaaaaaaaaa");
+		
+		usuario.setNome(rs.getString("nome"));
+		usuario.setSenha(rs.getString("senha"));
+		return usuario;
 	}
 	
 	
@@ -118,18 +131,24 @@ public class CartaoDaoJDBC implements DaoCartao{
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-					"SELECT cartao_credito.*, usuario.cpf as Dono"
-					+ "FROM cartap_credito INNER JOIN usuario"
-					+ "ON cartao_credito.cpf = usuario.cpf");
+					"SELECT cartao_credito.*, usuario.id_usuario "
+					+ "FROM cartao_credito INNER JOIN usuario "
+					+ "ON cartao_credito.id_usuario = usuario.id_usuario "
+					+ "ORDER BY validade");
 			rs = st.executeQuery();
 			
 			List<Cartao> list = new ArrayList<>();
-			Map<Integer, Usuario>map = new HashMap<>();
+			Map<Integer, Usuario> map = new HashMap<>();
 			
 			while(rs.next()) {
-				Usuario us = map.get(rs.getString("cpf"));
+				Usuario usu = map.get(rs.getInt("cartao_credito.id_usuario"));
 				
-				Cartao obj = instantiateCartao(rs, us);
+				if(usu==null) {
+					usu = instantiateUsuario(rs);
+					map.put(rs.getInt("id_usuario"), usu);
+				}
+				
+				Cartao obj = instantiateCartao(rs, usu);
 				list.add(obj);
 			}
 			return list;
@@ -142,8 +161,41 @@ public class CartaoDaoJDBC implements DaoCartao{
 	}
 
 	@Override
-	public List<Cartao> findByCpf(Usuario usuario) {
-		// TODO Auto-generated method stub
+	public List<Cartao> findByIdUsuario(Usuario usuario) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT cartao_credito.*,usuario.id_usuario as Dono "
+					+ "FROM cartao_credito INNER JOIN usuario "
+					+ "ON cartao_credito.id_usuario = usuario.id_usuario "
+					+ "WHERE cartao_credito.id_usuario = ? "
+					+ "ORDER BY id_cartao");
+			
+			st.setInt(1, usuario.getId_usuario());
+			rs = st.executeQuery();
+			
+			List<Cartao> list = new ArrayList<>();
+			Map<Integer, Usuario> map = new HashMap<>();
+			
+			while(rs.next()) {
+				Usuario usu = map.get(rs.getInt("id_usuario"));
+				
+				if(usu==null) {
+					usu = instantiateUsuario(rs);
+					map.put(rs.getInt("id_usuario"), usu);
+				}
+				
+				Cartao obj = instantiateCartao(rs, usu);
+				list.add(obj);
+			}
+			
+		}catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 		return null;
 	}
 
