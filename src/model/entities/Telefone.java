@@ -6,28 +6,30 @@ public class Telefone implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	private String cpf;
-	private int telefone;
+	private int id_usuario;
+	private String fone;
 	
-	public Telefone(String cpf, int telefone) {
-		this.cpf = cpf;
-		this.telefone = telefone;
+	public Telefone(int id_usuario, String fone) {
+		this.id_usuario = id_usuario;
+		this.fone = fone;
+	}
+	
+	public Telefone() {}
+
+	public int getId_usuario() {
+		return id_usuario;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public String getFone() {
+		return fone;
 	}
 
-	public int getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(int telefone) {
-		this.telefone = telefone;
+	public void setFone(String fone) {
+		this.fone = fone;
 	}
 	
 	
