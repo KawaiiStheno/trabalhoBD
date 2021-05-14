@@ -8,18 +8,21 @@ public class Partida implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int id_partida;
-	private int id_esporte;
 	private String nome_partida;
+	private int id_esporte;
 	private Date data_partida;
-	private Date horario_partida;
+	private int id_estadio;
 	
-	public Partida(int id_partida, int id_esporte, String nome_partida, Date data_partida, Date horario_partida) {
+	public Partida(int id_partida, String nome_partida, int id_esporte, Date data_partida, int id_estadio) {
 		this.id_partida = id_partida;
-		this.id_esporte = id_esporte;
 		this.nome_partida = nome_partida;
+		this.id_esporte = id_esporte;
 		this.data_partida = data_partida;
-		this.horario_partida = horario_partida;
+		this.id_estadio = id_estadio;
 	}
+	
+	public Partida() {}
+
 
 	public int getId_partida() {
 		return id_partida;
@@ -27,14 +30,6 @@ public class Partida implements Serializable{
 
 	public void setId_partida(int id_partida) {
 		this.id_partida = id_partida;
-	}
-
-	public int getId_esporte() {
-		return id_esporte;
-	}
-
-	public void setId_esporte(int id_esporte) {
-		this.id_esporte = id_esporte;
 	}
 
 	public String getNome_partida() {
@@ -45,6 +40,14 @@ public class Partida implements Serializable{
 		this.nome_partida = nome_partida;
 	}
 
+	public int getId_esporte() {
+		return id_esporte;
+	}
+
+	public void setId_esporte(int id_esporte) {
+		this.id_esporte = id_esporte;
+	}
+
 	public Date getData_partida() {
 		return data_partida;
 	}
@@ -53,12 +56,16 @@ public class Partida implements Serializable{
 		this.data_partida = data_partida;
 	}
 
-	public Date getHorario_partida() {
-		return horario_partida;
+	public int getId_estadio() {
+		return id_estadio;
 	}
 
-	public void setHorario_partida(Date horario_partida) {
-		this.horario_partida = horario_partida;
+	public void setId_estadio(int id_estadio) {
+		this.id_estadio = id_estadio;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
@@ -94,9 +101,10 @@ public class Partida implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Partida [id_partida=" + id_partida + ", id_esporte=" + id_esporte + ", nome_partida=" + nome_partida
-				+ ", data_partida=" + data_partida + ", horario_partida=" + horario_partida + "]";
+		return "Partida [id_partida=" + id_partida + ", nome_partida=" + nome_partida + ", id_esporte=" + id_esporte + 
+				", data_partida=" + data_partida + "]";
 	}
+
 	
 	
 	
