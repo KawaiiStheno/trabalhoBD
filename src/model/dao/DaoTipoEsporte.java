@@ -7,8 +7,6 @@ import model.entities.TipoEsporte;
 public interface DaoTipoEsporte {
 
 	void insert(TipoEsporte obj);
-	void update(TipoEsporte obj);
-	void deleteById(Integer id);
-	TipoEsporte findById(Integer id);
+	void deleteByNome_esporte(String nome_esporte);
 	List<TipoEsporte> findAll();
 }

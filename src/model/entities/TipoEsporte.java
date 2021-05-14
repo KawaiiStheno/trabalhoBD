@@ -6,22 +6,29 @@ public class TipoEsporte implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private int id;
+	private int id_esporte;
 	private String nome_esporte;
 	
 	public TipoEsporte(String nome_esporte) {
 		this.nome_esporte = nome_esporte;
 	}
+	
+	public TipoEsporte() {}
 
+<<<<<<< HEAD
 	public TipoEsporte() {
 	}
 
 	public int getId() {
 		return id;
+=======
+	public int getId_esporte() {
+		return id_esporte;
+>>>>>>> d07f0561e414185ab08faa2f11c3165a88074c4c
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId_esporte(int id_esporte) {
+		this.id_esporte = id_esporte;
 	}
 
 	public String getNome_esporte() {
@@ -36,7 +43,7 @@ public class TipoEsporte implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + id_esporte;
 		result = prime * result + ((nome_esporte == null) ? 0 : nome_esporte.hashCode());
 		return result;
 	}
@@ -50,7 +57,7 @@ public class TipoEsporte implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		TipoEsporte other = (TipoEsporte) obj;
-		if (id != other.id)
+		if (id_esporte != other.id_esporte)
 			return false;
 		if (nome_esporte == null) {
 			if (other.nome_esporte != null)
@@ -62,7 +69,7 @@ public class TipoEsporte implements Serializable{
 
 	@Override
 	public String toString() {
-		return "TipoEsporte [id=" + id + ", nome_esporte=" + nome_esporte + "]";
+		return "TipoEsporte [id_esporte=" + id_esporte + ", nome_esporte=" + nome_esporte + "]";
 	}
 	
 	

@@ -9,7 +9,7 @@ public interface DaoPartida {
 	void insert(Partida obj);
 	void update(Partida obj);
 	void deleteById(Integer id);
-	Partida findById(Integer id);
-	Partida findByEsporte(Integer idEsporte);
+	List<Partida> findByEstadio(Integer id_estadio);
+	List<Partida> findByEsporte(Integer id_esporte);
 	List<Partida> findAll();
 }

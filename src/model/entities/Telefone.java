@@ -6,14 +6,26 @@ public class Telefone implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+<<<<<<< HEAD
 	private int id_fone;
 	private String numero;
 	private int id_usuario;
 	
 	public Telefone() {
 		
+=======
+	private int id_usuario;
+	private String fone;
+	
+	public Telefone(int id_usuario, String fone) {
+		this.id_usuario = id_usuario;
+		this.fone = fone;
+>>>>>>> d07f0561e414185ab08faa2f11c3165a88074c4c
 	}
+	
+	public Telefone() {}
 
+<<<<<<< HEAD
 	public Telefone(int id_fone, String numero, int id_usuario) {
 		this.id_fone = id_fone;
 		this.numero = numero;
@@ -30,6 +42,22 @@ public class Telefone implements Serializable{
 
 	public String getNumero() {
 		return numero;
+=======
+	public int getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
+	public String getFone() {
+		return fone;
+	}
+
+	public void setFone(String fone) {
+		this.fone = fone;
+>>>>>>> d07f0561e414185ab08faa2f11c3165a88074c4c
 	}
 
 	public void setNumero(String numero) {

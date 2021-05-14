@@ -27,15 +27,24 @@ public class TipoEsporteDaoJDBC implements DaoTipoEsporte{
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
+<<<<<<< HEAD
 					"INSERT INTO tipo_esporte "
 					+ "(nome_esporte) "
 					+ "VALUES "
 					+ "(?)", Statement.RETURN_GENERATED_KEYS);
 			
+=======
+					"INSERT INTO tipo_esporte"
+					+ "(nome_esporte)"
+					+ "VALUES"
+					+ "(?)", 
+					Statement.RETURN_GENERATED_KEYS);
+>>>>>>> d07f0561e414185ab08faa2f11c3165a88074c4c
 			st.setString(1, obj.getNome_esporte());
 			
 			int rowsAffected = st.executeUpdate();
 			
+<<<<<<< HEAD
 			if(rowsAffected > 0) {
 				ResultSet rs = st.getGeneratedKeys();
 				if(rs.next()) {
@@ -43,6 +52,9 @@ public class TipoEsporteDaoJDBC implements DaoTipoEsporte{
 					obj.setId(id);
 				}
 			}else {
+=======
+			if(rowsAffected==0) {
+>>>>>>> d07f0561e414185ab08faa2f11c3165a88074c4c
 				throw new DbException("Unexpected error! No rows affected!");
 			}
 		}catch(SQLException e) {
@@ -54,6 +66,7 @@ public class TipoEsporteDaoJDBC implements DaoTipoEsporte{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void update(TipoEsporte obj) {
 		PreparedStatement st = null;
 		try {
@@ -111,24 +124,52 @@ public class TipoEsporteDaoJDBC implements DaoTipoEsporte{
 		}
 	}
 
+=======
+	public void deleteByNome_esporte(String nome_esporte) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("DELETE FROM tipo_esporte WHERE nome_esporte = ? ");
+			st.setString(1, nome_esporte);
+			st.executeUpdate();
+		}catch(SQLException e) {
+			throw new DbIntegrityException(e.getMessage());
+		}finally {
+			DB.closeStatement(st);
+			DB.closeConnection();
+		}
+		
+	}
+	
+>>>>>>> d07f0561e414185ab08faa2f11c3165a88074c4c
 	@Override
 	public List<TipoEsporte> findAll() {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
+<<<<<<< HEAD
 			st = conn.prepareStatement("SELECT * FROM tipo_esporte ORDER BY nome_esporte");
+=======
+			st = conn.prepareStatement("SELECT * FROM tipo_esporte");
+>>>>>>> d07f0561e414185ab08faa2f11c3165a88074c4c
 			rs = st.executeQuery();
 			
 			List<TipoEsporte> list = new ArrayList<>();
 			
 			while(rs.next()) {
 				TipoEsporte obj = new TipoEsporte();
+<<<<<<< HEAD
 				obj.setId(rs.getInt("id_esporte"));
+=======
+				obj.setId_esporte(rs.getInt("id_esporte"));
+>>>>>>> d07f0561e414185ab08faa2f11c3165a88074c4c
 				obj.setNome_esporte(rs.getString("nome_esporte"));
 				list.add(obj);
 			}
 			return list;
+<<<<<<< HEAD
 			
+=======
+>>>>>>> d07f0561e414185ab08faa2f11c3165a88074c4c
 		}catch(SQLException e) {
 			throw new DbException(e.getMessage());
 		}finally {
