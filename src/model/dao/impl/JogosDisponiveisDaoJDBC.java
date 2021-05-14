@@ -11,40 +11,37 @@ import java.util.List;
 import dbProperties.DB;
 import dbProperties.DbException;
 import dbProperties.DbIntegrityException;
-import model.dao.DaoTipoEsporte;
-import model.entities.TipoEsporte;
+import model.dao.DaoJogosDisponiveis;
+import model.entities.JogosDisponiveis;
 
-public class TipoEsporteDaoJDBC implements DaoTipoEsporte{
+public class JogosDisponiveisDaoJDBC implements DaoJogosDisponiveis{
 
 	private Connection conn;
 	
-	public TipoEsporteDaoJDBC(Connection conn) {
+	
+	public JogosDisponiveisDaoJDBC(Connection conn) {
+		super();
 		this.conn = conn;
 	}
-	
+
 	@Override
-	public void insert(TipoEsporte obj) {
+	public void insert(JogosDisponiveis obj) {
 		PreparedStatement st = null;
-		try {
+		try{
 			st = conn.prepareStatement(
-					"INSERT INTO tipo_esporte "
-					+ "(nome_esporte) "
+					"INSERT INTO jogos_disponiveis "
+					+ "(id_partida, nome_partida, qtd_ingressos) "
 					+ "VALUES "
-					+ "(?)", Statement.RETURN_GENERATED_KEYS);
+					+ "(?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			
-			st.setString(1, obj.getNome_esporte());
+			st.setInt(1, obj.getId_partida());
+			st.setString(2, obj.getNome_partida());
+			st.setInt(3, obj.getQtd_ingressos());
 			
-			int rowsAffected = st.executeUpdate();
-			
-			if(rowsAffected > 0) {
-				ResultSet rs = st.getGeneratedKeys();
-				if(rs.next()) {
-					int id = rs.getInt(1);
-					obj.setId(id);
-				}
-			}else {
+			if(st.executeUpdate()<=0) {
 				throw new DbException("Unexpected error! No rows affected!");
 			}
+			
 		}catch(SQLException e) {
 			throw new DbException(e.getMessage());
 		}finally {
@@ -54,15 +51,15 @@ public class TipoEsporteDaoJDBC implements DaoTipoEsporte{
 	}
 
 	@Override
-	public void update(TipoEsporte obj) {
+	public void update(JogosDisponiveis obj) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
-					"UPDATE tipo_esporte "
-					+"SET nome_esporte = ?"
-					+"WHERE id_esporte = ?");
-			st.setString(1, obj.getNome_esporte());
-			st.setInt(2, obj.getId());
+					"UPDATE jogos_disponiveis "
+					+ "SET nome_partida = ?, qtd_ingressos = ? "
+					+ "WHERE id_partida = ?");
+			st.setString(1, obj.getNome_partida());
+			st.setInt(2, obj.getQtd_ingressos());
 			
 			st.executeUpdate();
 			
@@ -71,16 +68,16 @@ public class TipoEsporteDaoJDBC implements DaoTipoEsporte{
 		}finally {
 			DB.closeStatement(st);
 		}
+		
 	}
-
+	
 	@Override
 	public void deleteById(Integer id) {
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement("DELETE FROM tipo_esporte WHERE id_esporte = ?");
+			st = conn.prepareStatement("DELETE FROM jogos_disponiveis WHERE id_partida = ?");
 			st.setInt(1, id);
 			st.executeUpdate();
-		
 		}catch(SQLException e) {
 			throw new DbIntegrityException(e.getMessage());
 		}finally {
@@ -89,17 +86,18 @@ public class TipoEsporteDaoJDBC implements DaoTipoEsporte{
 	}
 
 	@Override
-	public TipoEsporte findById(Integer id) {
+	public JogosDisponiveis findById(Integer id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
-			st = conn.prepareStatement("SELECT * FROM tipo_esporte WHERE id_esporte = ?");
+			st = conn.prepareStatement("SELECT * FROM jogos_disponiveis WHERE id_partida = ?");
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			if(rs.next()) {
-				TipoEsporte obj = new TipoEsporte();
-				obj.setId(rs.getInt("id_esporte"));
-				obj.setNome_esporte(rs.getString("nome_esporte"));
+				JogosDisponiveis obj = new JogosDisponiveis();
+				obj.setId_partida(rs.getInt("id_partida"));
+				obj.setNome_partida(rs.getString("nome_partida"));
+				obj.setQtd_ingressos(rs.getInt("qtd_ingressos"));
 				return obj;
 			}
 			return null;
@@ -112,19 +110,20 @@ public class TipoEsporteDaoJDBC implements DaoTipoEsporte{
 	}
 
 	@Override
-	public List<TipoEsporte> findAll() {
+	public List<JogosDisponiveis> findAll() {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
-			st = conn.prepareStatement("SELECT * FROM tipo_esporte ORDER BY nome_esporte");
+			st = conn.prepareStatement("SELECT * FROM jogos_disponiveis ORDER BY id_partida");
 			rs = st.executeQuery();
 			
-			List<TipoEsporte> list = new ArrayList<>();
+			List<JogosDisponiveis> list = new ArrayList<>();
 			
 			while(rs.next()) {
-				TipoEsporte obj = new TipoEsporte();
-				obj.setId(rs.getInt("id_esporte"));
-				obj.setNome_esporte(rs.getString("nome_esporte"));
+				JogosDisponiveis obj = new JogosDisponiveis();
+				obj.setId_partida(rs.getInt("id_partida"));
+				obj.setNome_partida(rs.getString("nome_partida"));
+				obj.setQtd_ingressos(rs.getInt("qtd_ingressos"));
 				list.add(obj);
 			}
 			return list;

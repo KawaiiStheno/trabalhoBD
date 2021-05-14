@@ -6,29 +6,76 @@ public class Telefone implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	private String cpf;
-	private int telefone;
+	private int id_fone;
+	private String numero;
+	private int id_usuario;
 	
-	public Telefone(String cpf, int telefone) {
-		this.cpf = cpf;
-		this.telefone = telefone;
+	public Telefone() {
+		
 	}
 
-	public String getCpf() {
-		return cpf;
+	public Telefone(int id_fone, String numero, int id_usuario) {
+		this.id_fone = id_fone;
+		this.numero = numero;
+		this.id_usuario = id_usuario;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public int getId_fone() {
+		return id_fone;
 	}
 
-	public int getTelefone() {
-		return telefone;
+	public void setId_fone(int id_fone) {
+		this.id_fone = id_fone;
 	}
 
-	public void setTelefone(int telefone) {
-		this.telefone = telefone;
+	public String getNumero() {
+		return numero;
 	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public int getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id_fone;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Telefone other = (Telefone) obj;
+		if (id_fone != other.id_fone)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Telefone [id_fone=" + id_fone + ", numero=" + numero + ", id_usuario=" + id_usuario + "]";
+	}
+	
+	
+
+	
+
+	
 	
 	
 }

@@ -5,6 +5,7 @@ import model.dao.impl.CartaoDaoJDBC;
 import model.dao.impl.EstadioDaoJDBC;
 import model.dao.impl.GerenteDaoJDBC;
 import model.dao.impl.IngressoDaoJDBC;
+import model.dao.impl.JogosDisponiveisDaoJDBC;
 import model.dao.impl.PartidaDaoJDBC;
 import model.dao.impl.TelefoneDaoJDBC;
 import model.dao.impl.TipoEsporteDaoJDBC;
@@ -42,5 +43,9 @@ public class DaoAplication {
 	
 	public static DaoUsuario createDaoUsuario() {
 		return new UsuarioDaoJDBC(DB.getConnection());
+	}
+	
+	public static DaoJogosDisponiveis createDaoJogosDisponiveis() {
+		return new JogosDisponiveisDaoJDBC(DB.getConnection());
 	}
 }

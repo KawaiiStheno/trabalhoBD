@@ -8,7 +8,7 @@ public interface DaoTelefone {
 
 	void insert(Telefone obj);
 	void update(Telefone obj);
-	void deleteByCpf(String cpf);
-	Telefone findBycpf(String cpf);
+	void deleteByNumero(String numero);
+	Telefone findByNumero(String numero);
 	List<Telefone> findAll();
 }

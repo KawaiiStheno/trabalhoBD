@@ -9,9 +9,11 @@ public class TipoEsporte implements Serializable{
 	private int id;
 	private String nome_esporte;
 	
-	public TipoEsporte(int id, String nome_esporte) {
-		this.id = id;
+	public TipoEsporte(String nome_esporte) {
 		this.nome_esporte = nome_esporte;
+	}
+
+	public TipoEsporte() {
 	}
 
 	public int getId() {
