@@ -7,17 +7,17 @@ public class Cartao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int id_cartao;
+	private int id_usuario;
 	private String numero;
 	private String validade;
-	private int cod_seguranca;
+	private String cod_seguranca;
 	
-	private Usuario usuario;
 	
-	public Cartao(String numero, String validade, int cod_seguranca, Usuario usuario) {
+	public Cartao(int id_usuario, String numero, String validade, String cod_seguranca) {
+		this.setId_usuario(id_usuario);
 		this.numero = numero;
 		this.validade = validade;
 		this.cod_seguranca = cod_seguranca;
-		this.usuario = usuario;
 	}
 
 	public Cartao() {
@@ -47,31 +47,31 @@ public class Cartao implements Serializable{
 		this.validade = validade;
 	}
 
-	public int getCod_segurança() {
+	public String getCod_segurança() {
 		return cod_seguranca;
 	}
 
-	public void setCod_seguranca(int cod_segurança) {
+	public void setCod_seguranca(String cod_segurança) {
 		this.cod_seguranca = cod_segurança;
 	}
 	
-	public Usuario getUsuario() {
-		return usuario;
+	public int getId_usuario() {
+		return id_usuario;
 	}
 	
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 	
 
-	@Override
+	/*@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		String result = 1;
 		result = prime * result + cod_seguranca;
 		result = prime * result + id_cartao;
 		return result;
-	}
+	}*/
 
 	@Override
 	public boolean equals(Object obj) {
@@ -91,10 +91,10 @@ public class Cartao implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Cartao [id_cartao=" + id_cartao + ", numero=" + numero + ", validade=" + validade
-				+ ", cod_segurança=" + cod_seguranca + "]";
+		return "Id: " + id_cartao + " - Numero: " + numero + " - Validade: " + validade
+				+ " - Codigo Seguranca: ***";
 	}
-	
+
 	
 	
 }

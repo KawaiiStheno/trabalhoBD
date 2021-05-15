@@ -1,7 +1,6 @@
 package model.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Partida implements Serializable{
 
@@ -10,15 +9,20 @@ public class Partida implements Serializable{
 	private int id_partida;
 	private String nome_partida;
 	private int id_esporte;
-	private Date data_partida;
+	private String data_partida;
+	private String horario_partida;
 	private int id_estadio;
+	private String nome_estadio;
+	private int valor_ingresso;
 	
-	public Partida(int id_partida, String nome_partida, int id_esporte, Date data_partida, int id_estadio) {
+	public Partida(int id_partida, String nome_partida, int id_esporte, String data_partida, String horario_partida, int id_estadio, int valor_ingresso) {
 		this.id_partida = id_partida;
 		this.nome_partida = nome_partida;
 		this.id_esporte = id_esporte;
 		this.data_partida = data_partida;
+		this.horario_partida= horario_partida;
 		this.id_estadio = id_estadio;
+		this.valor_ingresso = valor_ingresso;
 	}
 	
 	public Partida() {}
@@ -48,11 +52,11 @@ public class Partida implements Serializable{
 		this.id_esporte = id_esporte;
 	}
 
-	public Date getData_partida() {
+	public String getData_partida() {
 		return data_partida;
 	}
 
-	public void setData_partida(Date data_partida) {
+	public void setData_partida(String data_partida) {
 		this.data_partida = data_partida;
 	}
 
@@ -64,6 +68,30 @@ public class Partida implements Serializable{
 		this.id_estadio = id_estadio;
 	}
 
+	public String getHorario_partida() {
+		return horario_partida;
+	}
+
+	public void setHora_partida(String horario_partida) {
+		this.horario_partida = horario_partida;
+	}
+
+	public String getNome_estadio() {
+		return nome_estadio;
+	}
+	
+	public void setNome_estadio(String nome_estadio) {
+		this.nome_estadio = nome_estadio;
+	}
+	
+	public int getValor_ingresso() {
+		return valor_ingresso;
+	}
+	
+	public void setValor_ingresso(int valor_ingresso) {
+		this.valor_ingresso = valor_ingresso;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -101,8 +129,8 @@ public class Partida implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Partida [id_partida=" + id_partida + ", nome_partida=" + nome_partida + ", id_esporte=" + id_esporte + 
-				", data_partida=" + data_partida + "]";
+		return "Id: " + id_partida + " - Nome Partida: " + nome_partida + " - Data Partida: " + data_partida + 
+			   " - Nome estadio: " + nome_estadio + " - Valor ingresso: " + valor_ingresso;
 	}
 
 	

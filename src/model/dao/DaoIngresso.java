@@ -5,6 +5,7 @@ import model.entities.Ingresso;
 public interface DaoIngresso {
 
 	void insert(Ingresso obj);
+	void deleteById(int id_partida);
 	/*void update(Ingresso obj);
 	void deleteById(Ingresso id);
 	Ingresso findById(Integer id);

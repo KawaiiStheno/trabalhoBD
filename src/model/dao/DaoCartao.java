@@ -3,7 +3,6 @@ package model.dao;
 import java.util.List;
 
 import model.entities.Cartao;
-import model.entities.Usuario;
 
 public interface DaoCartao {
 
@@ -11,5 +10,5 @@ public interface DaoCartao {
 	void update (Cartao obj);
 	void deleteById(Integer id);
 	List<Cartao> findAll();
-	List<Cartao> findByIdUsuario(Usuario usuario);
+	List<Cartao> findByIdUsuario(int id_usuario);
 }

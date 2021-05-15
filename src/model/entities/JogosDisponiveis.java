@@ -67,12 +67,8 @@ public class JogosDisponiveis implements Serializable{
 
 	@Override
 	public String toString() {
-		return "JogosDisponiveis [id_partida=" + id_partida + ", nome_partida=" + nome_partida + ", qtd_ingressos="
-				+ qtd_ingressos + "]";
-	}
-	
-	
-	
-	
+		return "Id: " + id_partida + " - Nome Partida: " + nome_partida + " - Ingressos disponiveis: "
+				+ qtd_ingressos;
+	}	
 	
 }

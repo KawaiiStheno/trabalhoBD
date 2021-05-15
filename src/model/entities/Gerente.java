@@ -6,31 +6,15 @@ public class Gerente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int id_gerente;
-	private String cpf;
+	private int id_usuario;
 	private int id_partida;
 	
-	public Gerente(int id_gerente, String cpf, int id_partida) {
-		this.id_gerente = id_gerente;
-		this.cpf = cpf;
+	public Gerente(int id_usuario, int id_partida) {
+		this.setId_usuario(id_usuario);
 		this.id_partida = id_partida;
 	}
-
-	public int getId_gerente() {
-		return id_gerente;
-	}
-
-	public void setId_gerente(int id_gerente) {
-		this.id_gerente = id_gerente;
-	}
-
-	public String getCpg() {
-		return cpf;
-	}
-
-	public void setCpg(String cpg) {
-		this.cpf = cpg;
-	}
+	
+	public Gerente() {}
 
 	public int getId_partida() {
 		return id_partida;
@@ -40,13 +24,23 @@ public class Gerente implements Serializable {
 		this.id_partida = id_partida;
 	}
 
+	public int getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+	
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + id_gerente;
 		result = prime * result + id_partida;
+		result = prime * result + id_usuario;
 		return result;
 	}
 
@@ -59,14 +53,9 @@ public class Gerente implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Gerente other = (Gerente) obj;
-		if (cpf == null) {
-			if (other.cpf != null)
-				return false;
-		} else if (!cpf.equals(other.cpf))
-			return false;
-		if (id_gerente != other.id_gerente)
-			return false;
 		if (id_partida != other.id_partida)
+			return false;
+		if (id_usuario != other.id_usuario)
 			return false;
 		return true;
 	}

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import dbProperties.DB;
+import dbProperties.DbIntegrityException;
 import model.dao.DaoIngresso;
 import model.entities.Ingresso;
 
@@ -24,13 +25,12 @@ public class IngressoDaoJDBC implements DaoIngresso{
 		try {
 			st = conn.prepareStatement(
 					"INSERT INTO ingresso "
-					+ "(id_partida, preco, quant_ingresso, id_estadio) "
+					+ "(id_partida, ingresso_disp, id_estadio) "
 					+ "VALUES "
 					+ "(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			st.setInt(1, obj.getId_partida());
-			st.setString(2, obj.getPreco());
-			st.setInt(3, obj.getQuant_ingresso());
-			st.setInt(4, obj.getId_estadio());
+			st.setInt(2, obj.getIngresso_disp());
+			st.setInt(3, obj.getId_estadio());
 			
 			int rowsAffected = st.executeUpdate();
 			
@@ -38,13 +38,28 @@ public class IngressoDaoJDBC implements DaoIngresso{
 				ResultSet rs = st.getGeneratedKeys();
 				if(rs.next()) {
 					int id = rs.getInt(1);
-					obj.setId_estadio(id);
+					obj.setId_ingresso(id);
 				}
 			}
 		}catch(SQLException e) {
 
 		}finally {
 			DB.closeStatement(st);
+			//DB.closeConnection();
+		}
+	}
+	@Override
+	public void deleteById(int id_partida) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("DELETE FROM ingresso WHERE id_partida = ?");
+			st.setInt(1, id_partida);
+			st.executeUpdate();
+		}catch(SQLException e) {
+			throw new DbIntegrityException(e.getMessage());
+		}finally {
+			DB.closeStatement(st);
+			//DB.closeConnection();
 		}
 	}
 /*
@@ -54,11 +69,6 @@ public class IngressoDaoJDBC implements DaoIngresso{
 		
 	}
 
-	@Override
-	public void deleteById(Ingresso id) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public Ingresso findById(Integer id) {

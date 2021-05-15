@@ -14,7 +14,7 @@ public class Estadio implements Serializable{
 	
 	public Estadio(String nome_estadio, int quant_ingresso, String estado, String cidade) {
 		this.nome_estadio = nome_estadio;
-		this.quant_ingresso = quant_ingresso;
+		this.quant_ingresso = 1000;
 		this.estado = estado;
 		this.cidade = cidade;
 	}
@@ -105,8 +105,8 @@ public class Estadio implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Estadio [nome_estadio=" + nome_estadio + ", quant_ingresso=" + quant_ingresso + ", estado=" + estado
-				+ ", cidade=" + cidade + "]";
+		return "Nome do Estadio: " + nome_estadio + " - Capacidad: " + quant_ingresso + " - Estado: " + estado
+				+ " - Cidade: " + cidade;
 	}
 	
 	

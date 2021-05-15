@@ -15,16 +15,8 @@ public class TipoEsporte implements Serializable{
 	
 	public TipoEsporte() {}
 
-<<<<<<< HEAD
-	public TipoEsporte() {
-	}
-
-	public int getId() {
-		return id;
-=======
 	public int getId_esporte() {
 		return id_esporte;
->>>>>>> d07f0561e414185ab08faa2f11c3165a88074c4c
 	}
 
 	public void setId_esporte(int id_esporte) {
@@ -69,7 +61,7 @@ public class TipoEsporte implements Serializable{
 
 	@Override
 	public String toString() {
-		return "TipoEsporte [id_esporte=" + id_esporte + ", nome_esporte=" + nome_esporte + "]";
+		return "Id: " + id_esporte + " - Nome do esporte: " + nome_esporte;
 	}
 	
 	

@@ -44,7 +44,7 @@ public class DaoAplication {
 	public static DaoUsuario createDaoUsuario() {
 		return new UsuarioDaoJDBC(DB.getConnection());
 	}
-	
+
 	public static DaoJogosDisponiveis createDaoJogosDisponiveis() {
 		return new JogosDisponiveisDaoJDBC(DB.getConnection());
 	}

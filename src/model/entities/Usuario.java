@@ -22,8 +22,6 @@ public class Usuario implements Serializable{
 	public Usuario() {
 	}
 	
-	
-
 	public int getId_usuario() {
 		return id_usuario;
 	}
@@ -90,7 +88,7 @@ public class Usuario implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Usuario [cpf=" + cpf + ", senha=" + senha + ", nome=" + nome + ", idade=" + idade + "]";
+		return "Id: " + id_usuario + " - CPF: " + cpf + " - Senha: " + senha + " - Nome=" + nome + " - Idade=" + idade;
 	}
 	
 	

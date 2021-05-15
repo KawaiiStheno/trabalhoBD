@@ -110,6 +110,7 @@ public class EstadioDaoJDBC implements DaoEstadio{
 		}finally {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
+			//DB.closeConnection();
 		}
 		
 	}
@@ -136,6 +137,7 @@ public class EstadioDaoJDBC implements DaoEstadio{
 		}finally {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
+			//DB.closeConnection();
 		}
 	}
 
@@ -164,6 +166,7 @@ public class EstadioDaoJDBC implements DaoEstadio{
 		}finally {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
+			//DB.closeConnection();
 		}
 	}
 

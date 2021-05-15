@@ -46,6 +46,7 @@ public class JogosDisponiveisDaoJDBC implements DaoJogosDisponiveis{
 			throw new DbException(e.getMessage());
 		}finally {
 			DB.closeStatement(st);
+			//DB.closeConnection();
 		}
 		
 	}
@@ -67,6 +68,7 @@ public class JogosDisponiveisDaoJDBC implements DaoJogosDisponiveis{
 			throw new DbException(e.getMessage());
 		}finally {
 			DB.closeStatement(st);
+			//DB.closeConnection();
 		}
 		
 	}
@@ -82,6 +84,7 @@ public class JogosDisponiveisDaoJDBC implements DaoJogosDisponiveis{
 			throw new DbIntegrityException(e.getMessage());
 		}finally {
 			DB.closeStatement(st);
+			//DB.closeConnection();
 		}
 	}
 
@@ -106,6 +109,7 @@ public class JogosDisponiveisDaoJDBC implements DaoJogosDisponiveis{
 		}finally {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
+			//DB.closeConnection();
 		}
 	}
 
@@ -133,6 +137,7 @@ public class JogosDisponiveisDaoJDBC implements DaoJogosDisponiveis{
 		}finally {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
+			//DB.closeConnection();
 		}
 	}
 

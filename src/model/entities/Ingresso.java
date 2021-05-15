@@ -8,14 +8,12 @@ public class Ingresso implements Serializable{
 	
 	private int id_ingresso;
 	private int id_partida;
-	private String preco;
-	private int quant_ingresso;
+	private int ingresso_disp;
 	private int id_estadio;
 	
-	public Ingresso(int id_partida, String preco, int quant_ingresso, int id_estadio) {
+	public Ingresso(int id_partida, int ingresso_disp, int id_estadio) {
 		this.id_partida = id_partida;
-		this.preco = preco;
-		this.quant_ingresso = quant_ingresso;
+		this.ingresso_disp = ingresso_disp;
 		this.id_estadio = id_estadio;
 	}
 	
@@ -29,14 +27,6 @@ public class Ingresso implements Serializable{
 		this.id_ingresso = id_ingresso;
 	}
 
-	public String getPreco() {
-		return preco;
-	}
-
-	public void setPreco(String preco) {
-		this.preco = preco;
-	}
-
 	public int getId_partida() {
 		return id_partida;
 	}
@@ -45,12 +35,12 @@ public class Ingresso implements Serializable{
 		this.id_partida = id_partida;
 	}
 
-	public int getQuant_ingresso() {
-		return quant_ingresso;
+	public int getIngresso_disp() {
+		return ingresso_disp;
 	}
 
-	public void setQuant_ingresso(int quant_ingresso) {
-		this.quant_ingresso = quant_ingresso;
+	public void setIngresso_disp(int ingresso_disp) {
+		this.ingresso_disp = ingresso_disp;
 	}
 
 	public int getId_estadio() {
@@ -88,10 +78,8 @@ public class Ingresso implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Ingresso [id_ingresso=" + id_ingresso + ", preco=" + preco + ", id_partida=" + id_partida
-				+ ", quant_ingresso=" + quant_ingresso + ", id_estadio=" + id_estadio + "]";
+		return "Id: " + id_ingresso + " - Id_partida: " + id_partida
+				+ " - Ingressos disponiveis: " + ingresso_disp + " - Id_estadio=" + id_estadio;
 	}
-	
-	
-	
+
 }
